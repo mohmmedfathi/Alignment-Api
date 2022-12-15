@@ -18,7 +18,7 @@ from django.urls import path
 
 from Global.views import Global_Get_Post
 from rest_framework import permissions
-from . import swagger
+# from . import swagger
 # from drf_yasg.views import get_schema_view
 # from drf_yasg import openapi
 
