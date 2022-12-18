@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from . import models
 from . import serializers
-from drf_yasg.utils import swagger_auto_schema
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 class ScoreParams:
 	'''
@@ -142,7 +142,7 @@ def printMatrix(matrix):
 # print(*xSeq[::-1])
 # print(*ySeq[::-1])
 
-
+@csrf_exempt
 @api_view(['GET','POST'])
 def Global_Get_Post(request):
     # GET
