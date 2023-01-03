@@ -85,13 +85,13 @@ def getSequence(x,best,optLoc,matrix):
 			seq += x[j]
 	return seq[::-1]
 
-# {
-# "seq1": "ATGCT",
-# "seq2": "AGCT",
-# "gap": -2,
-# "match": 1,
-# "mismatch":-1
-# }
+{
+"seq1": "ATGCT",
+"seq2": "AGCT",
+"gap": -2,
+"match": 1,
+"mismatch":-1
+}
 
 
 @api_view(['GET','POST'])
