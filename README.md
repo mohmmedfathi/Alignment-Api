@@ -1,5 +1,6 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![MIT License][license-shield]][license-url]
+
 <br />
 <div>
 
@@ -21,6 +22,7 @@ I implemented in this project **local** and **global** in python then deliver as
 
 * [![Python][Python]][Python-url]
 * [![Django][Django]][Django-url]
+* [![Django Rest Framework][drf-shield]][drf-url]
 * [![sqlite][sqlite]][sqlite-url]
 
 <!-- GETTING STARTED -->
@@ -178,6 +180,8 @@ Project Link: [https://github.com/mohmmedfathi/Alignment-Api/](https://github.co
 [linkedin-url]: https://www.linkedin.com/in/mohammed-fathi-4a08071a7/
 [Django]: https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green
 [Django-url]: https://docs.djangoproject.com/en/3.2/
+[drf-shield]: https://img.shields.io/badge/DRF-Django%20Rest%20Framework-red
+[drf-url]: https://www.django-rest-framework.org/
 [Python]: https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue
 [Python-url]: https://docs.python.org/3/
 [sqlite]: https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white
