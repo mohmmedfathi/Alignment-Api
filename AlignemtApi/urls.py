@@ -18,7 +18,7 @@ from django.urls import path
 
 from Global.views import Global_Get_Post
 from local.views import Local_Get_Post
-from functions.views import SwissProt_Get_Post
+
 from rest_framework import permissions
 
 
@@ -26,6 +26,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('api/alignment/global/', Global_Get_Post),
     path('api/alignment/local/', Local_Get_Post),
-    path('api/database/swissprot/', SwissProt_Get_Post),
+    
 
 ]

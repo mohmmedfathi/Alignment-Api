@@ -5,7 +5,7 @@ from rest_framework import status
 from . import models
 from . import serializers
 from Bio import pairwise2
-from Bio.Seq import Seq
+
 
 # Create your views here.
 
@@ -41,10 +41,10 @@ def localAlign(x,y,score):
 	for i in range(1,len(y)+1):
 		for j in range(1,len(x)+1):
 			matrix[i][j] = max(
-				matrix[i][j-1] + score.gap,
-				matrix[i-1][j] + score.gap,
-				matrix[i-1][j-1] + (score.match if x[j-1] == y[i-1] else score.mismatch),
-				0
+                matrix[i][j - 1] + int(score.gap),
+                matrix[i - 1][j] + int(score.gap),
+                matrix[i - 1][j - 1] + (int(score.match) if x[j - 1] == y[i - 1] else int(score.mismatch)),
+                0
 				)
 
 			if matrix[i][j] >= best:
@@ -93,14 +93,16 @@ def getSequence(x,best,optLoc,matrix):
 # "mismatch":-1
 # }
 
+
 @api_view(['GET','POST'])
 def Local_Get_Post(request):
-    # GET
+    
     if request.method == 'GET':
         sequences = models.Local_Model.objects.all()
         serializer = serializers.LocalSerializer(sequences, many=True)
         return Response(serializer.data)
-    # POST
+    
+
     elif request.method == 'POST':
         x = request.data["seq1"]
         y = request.data["seq2"]
@@ -108,42 +110,37 @@ def Local_Get_Post(request):
         g = request.data["gap"]
         m = request.data["match"]
         mis = request.data["mismatch"]
-      
-        print('Input sequences are: ')
-        print(x)
-        print(y)
-        print()
-        
 
         score = ScoreParams(g,m,mis)
         best, optLoc, matrix = localAlign(x,y,score)
 
-        print('Score matrix:')
-        printMatrix(matrix)
-
         
-
-        
-        
-        xx = pairwise2.align.localxx("AATCG", "AACG")
+        xx = pairwise2.align.localxx(x, y)
         align1 = xx[0][0]
         align2 = xx[0][1]
-        dic = {"seq1":x,
+		
+		
+        matrix_str = ','.join(str(v) for v in matrix)
+		
+    
+        
+        data_dicitonary = {
+				"seq1":x,
                 "seq2":y,
 
-                "score_matrix":matrix,
-                "best_score":'The best score obtained is: '+str(best),
+                "score_matrix":matrix_str,
+                "best_score":best,
+
                 "alignment1":align1,
                 "alignment2":align2
                 }
         
-        print("before")
-        serializer = serializers.LocalSerializer(data=dic)
+    
+        serializer = serializers.LocalSerializer(data=data_dicitonary)
         
         if serializer.is_valid():
-            print("valid")
             serializer.save()
             return Response(serializer.data, status= status.HTTP_201_CREATED)
-        print("not valid")
-        print(serializer.data)
-        return Response(serializer.data, status= status.HTTP_400_BAD_REQUEST)
+
+        
+        return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
