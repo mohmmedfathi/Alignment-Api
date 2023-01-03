@@ -1,0 +1,4 @@
+biopython==1.76
+Django
+djangorestframework
+
